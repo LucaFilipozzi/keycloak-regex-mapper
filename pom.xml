@@ -54,8 +54,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <github.account>LucaFilipozzi</github.account>
-    <revision>1.0.3</revision>
+    <github.account>lucafilipozzi</github.account>
+    <revision>1.0.4</revision>
     <keycloak.version>15.0.2</keycloak.version>
   </properties>
 
