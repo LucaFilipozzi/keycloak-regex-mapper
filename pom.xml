@@ -50,6 +50,7 @@
     <keycloak.version>13.0.1</keycloak.version>
   </properties>
 
+  <!-- IMPORTANT: don't forget to update jboss-deployment-structure.xml -->
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -86,6 +87,20 @@
         <artifactId>keycloak-saml-core-public</artifactId>
         <version>${keycloak.version}</version>
         <scope>provided</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.keycloak</groupId>
@@ -259,6 +274,9 @@
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
           <version>6.2.2</version>
+          <configuration>
+            <skipProvidedScope>true</skipProvidedScope>
+          </configuration>
           <executions>
             <execution>
               <phase>verify</phase>
@@ -293,6 +311,12 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>3.2.0</version>
+          <configuration>
+            <ignoredUnusedDeclaredDependencies>
+              <ignoredUnusedDeclaredDependency>org.keycloak:keycloak-common</ignoredUnusedDeclaredDependency>
+              <ignoredUnusedDeclaredDependency>org.keycloak:keycloak-core</ignoredUnusedDeclaredDependency>
+            </ignoredUnusedDeclaredDependencies>
+          </configuration>
           <executions>
             <execution>
               <phase>verify</phase>

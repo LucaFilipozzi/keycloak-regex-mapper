@@ -68,13 +68,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <configuration>
-          <ignoredUnusedDeclaredDependencies>
-            <ignoredUnusedDeclaredDependency>org.keycloak:keycloak-common</ignoredUnusedDeclaredDependency>
-            <ignoredUnusedDeclaredDependency>org.keycloak:keycloak-core</ignoredUnusedDeclaredDependency>
-            <ignoredUnusedDeclaredDependency>org.keycloak:keycloak-server-spi</ignoredUnusedDeclaredDependency>
-          </ignoredUnusedDeclaredDependencies>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.basepom.maven</groupId>

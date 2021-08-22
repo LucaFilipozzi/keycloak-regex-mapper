@@ -22,7 +22,7 @@
   </dependencies>
 
   <build>
-    <!-- drop '-bundle' from finalName of the ear-->
+    <!-- drop '-bundle' from finalName of the ear -->
     <finalName>${project.parent.artifactId}-${revision}</finalName>
     <plugins>
       <plugin>

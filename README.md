@@ -21,11 +21,46 @@ multivalued OIDC claim (e.g.: groups) or SAML attribute (e.g.: groupMembership)
 into one or more realm and/or client role assignments based on regular
 expressions.
 
+## usage
+
+### deployment
+
+Copy `keycloak-regex-mapper-«version».ear` to `${KEYCLOAK_HOME}/deployments`.
+
+### configuration
+
+TODO
+
+## development
+
+### project structure
+
+This project follows the module/bundle approach to packaging keycloak extensions:
+
+* `module` builds the jar that contains the keycloak extensions
+
+* `bundle` builds the ear that contains the jar from `module` and the jars for
+  any not-provided dependencies
+
+### coding conventions
+
+This project uses:
+
+* [checkstyle][checkstyle] to achieve compliance with the [Google Java Style Guide][style-guide].
+  Please add the checkstyle plugin to your IDE.
+
+* [SonarLint][sonarlint] to improve code quality and code security.
+  Please add the SonarLint plugin to your IDE.
+
 ---
 Copyright 2021 Luca Filipozzi. Some rights reserved. See [LICENSE][license-url].
 
 
 [keycloak]: https://keycloak.org/
+
+[style-guide]: https://google.github.io/styleguide/javaguide.html
+[checkstyle]: https://checkstyle.sourceforge.io/
+[sonarlint]: https://www.sonarlint.org/
 
 [latest-release-img]: https://badgen.net/github/release/LucaFilipozzi/keycloak-regex-mapper?icon=github&label=latest%20release
 [latest-release-url]: https://github.com/LucaFilipozzi/keycloak-regex-mapper/releases/latest
