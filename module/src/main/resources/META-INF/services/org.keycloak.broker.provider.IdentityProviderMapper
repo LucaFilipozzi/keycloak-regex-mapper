@@ -1,0 +1,4 @@
+# Copyright 2021 Luca Filipozzi. Some rights reserved. See LICENSE.
+
+com.github.lucafilipozzi.keycloak.broker.oidc.mappers.RegexRealmAndClientRoleClaimMapper
+com.github.lucafilipozzi.keycloak.broker.saml.mappers.RegexRealmAndClientRoleAttributeMapper

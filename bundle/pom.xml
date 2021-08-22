@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2021 Luca Filipozzi. Some rights reserved. See LICENSE. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.lucafilipozzi</groupId>
+    <artifactId>keycloak-regex-mapper</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>keycloak-regex-mapper-bundle</artifactId>
+  <packaging>ear</packaging>
+  <name>bundle</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.parent.groupId}</groupId>
+      <artifactId>${project.parent.artifactId}-module</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- drop '-bundle' from finalName of the ear-->
+    <finalName>${project.parent.artifactId}-${revision}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <configuration>
+          <displayName>${project.parent.artifactId}</displayName>
+          <description>${project.parent.description}</description>
+          <modules>
+            <jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.parent.artifactId}-module</artifactId>
+              <!-- drop '-module' from finalName of the jar within the ear -->
+              <bundleFileName>${project.parent.groupId}-${project.parent.artifactId}-${revision}.jar</bundleFileName>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+          </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

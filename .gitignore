@@ -1,5 +1,8 @@
 # Copyright 2021 Luca Filipozzi. Some rights reserved. See LICENCE.
 
+# direnv
+.envrc
+
 # idea
 .idea/
 *.iml
