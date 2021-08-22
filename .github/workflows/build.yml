@@ -16,5 +16,6 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
+        distribution: 'adopt'
     - name: build with maven
       run: mvn --batch-mode --file pom.xml package
