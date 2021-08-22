@@ -16,7 +16,9 @@ jobs:
         java-version: '11'
     - name: build with maven
       run: mvn --batch-mode --file pom.xml package
-    - name: publish to github packages
-      run: mvn --batch-mode --file pom.xml deploy
+    - name: upload to release
+      uses: skx/github-action-publish-binaries@master
       env:
-        GITHUB_TOKEN: ${{ github.token }}⏎
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        args: 'bundle/target/*.ear'
