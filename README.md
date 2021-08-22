@@ -16,12 +16,13 @@
 
 # keycloak-regex-mapper
 
-This project provides a [keycloak][keycloak] broker mappers that map a
-multivalued OIDC claim (e.g.: groups) or SAML attribute (e.g.: gropuMembership)
-into realm and client role assignments based on regular expressions.
+This project provides a [keycloak][keycloak] broker mapper that maps a
+multivalued OIDC claim (e.g.: groups) or SAML attribute (e.g.: groupMembership)
+into one or more realm and/or client role assignments based on regular
+expressions.
 
 ---
-Copyright 2021 Luca Filipozzi. Some rights reserved. See License.
+Copyright 2021 Luca Filipozzi. Some rights reserved. See [LICENSE][license-url].
 
 
 [keycloak]: https://keycloak.org/
