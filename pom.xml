@@ -37,15 +37,24 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:https://github.com/lucafilipozzi/keycloak-regex-mapper</connection>
-    <developerConnection>scm:git:git://github.com/lucafilipozzi/keycloak-regex-mapper</developerConnection>
-    <url>https://github.com/lucafilipozzi/keycloak-regex-mapper</url>
+    <connection>scm:git:https://github.com/${github.account}/${project.artifactId}</connection>
+    <developerConnection>scm:git:git://github.com/${github.account}/${project.artifactId}</developerConnection>
+    <url>https://github.com/${github.account}/${project.artifactId}</url>
   </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>Github Packages</name>
+      <url>https://maven.pkg.github.com/${github.account}/${project.artifactId}</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <github.account>LucaFilipozzi</github.account>
     <revision>1.0.2</revision>
     <keycloak.version>15.0.2</keycloak.version>
   </properties>
