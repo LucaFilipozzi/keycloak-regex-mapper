@@ -7,14 +7,18 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Desired Behaviour
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+Please provide a description of the desired behaviour.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### Actual Behavior
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+Please provide a description of the actual behaviour.
+
+### Environment
+
+Please provide relevant details of your environment:
+
+* keycloak version
+* java version
+* platform (O/S, etc.)
