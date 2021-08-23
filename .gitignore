@@ -9,3 +9,6 @@
 
 # java
 target/
+
+# summon
+secrets.yml

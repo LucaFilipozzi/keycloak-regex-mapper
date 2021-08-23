@@ -10,9 +10,9 @@
 [![alerts][alerts-img]][alerts-url]
 [![code quality][code-quality-img]][code-quality-url]
 
+[![lines of code][lines-of-code-img]][lines-of-code-url]
 [![maintainability][maintainability-img]][maintainability-url]
 [![technical debt][technical-debt-img]][technical-debt-url]
-[![vulnerabilities][vulnerabilities-img]][vulnerabilities-url]
 
 # keycloak-regex-mapper
 
@@ -37,24 +37,23 @@ TODO
 
 This project follows the module/bundle approach to packaging keycloak extensions:
 
-* `module` builds the jar that contains the keycloak extensions
+  * `module` builds the jar that contains the keycloak extensions
 
-* `bundle` builds the ear that contains the jar from `module` and the jars for
-  any not-provided dependencies
+  * `bundle` builds the ear that contains the jar from `module` and the jars for
+    any not-provided dependencies
 
 ### coding conventions
 
 This project uses:
 
-* [checkstyle][checkstyle] to achieve compliance with the [Google Java Style Guide][style-guide].
-  Please add the checkstyle plugin to your IDE.
+  * [checkstyle][checkstyle] to achieve compliance with the [Google Java Style Guide][style-guide].
+    Please add the checkstyle plugin to your IDE.
 
-* [SonarLint][sonarlint] to improve code quality and code security.
-  Please add the SonarLint plugin to your IDE.
+  * [SonarLint][sonarlint] to improve code quality and code security.
+    Please add the SonarLint plugin to your IDE.
 
 ---
 Copyright 2021 Luca Filipozzi. Some rights reserved. See [LICENSE][license-url].
-
 
 [keycloak]: https://keycloak.org/
 
@@ -83,9 +82,10 @@ Copyright 2021 Luca Filipozzi. Some rights reserved. See [LICENSE][license-url].
 [code-quality-img]: https://badgen.net/lgtm/grade/g/LucaFilipozzi/keycloak-regex-mapper/java?icon=lgtm
 [code-quality-url]: https://lgtm.com/projects/g/LucaFilipozzi/keycloak-regex-mapper/context:java
 
+[lines-of-code-img]: https://badgen.net/codeclimate/loc/LucaFilipozzi/keycloak-regex-mapper?icon=codeclimate
+[lines-of-code-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper
+[maintainability-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper/maintainability
 [maintainability-img]: https://badgen.net/codeclimate/maintainability/LucaFilipozzi/keycloak-regex-mapper?icon=codeclimate
 [maintainability-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper/maintainability
 [technical-debt-img]: https://badgen.net/codeclimate/tech-debt/LucaFilipozzi/keycloak-regex-mapper?icon=codeclimate
 [technical-debt-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper/maintainability
-[vulnerabilities-img]: https://badgen.net/snyk/LucaFilipozzi/keycloak-regex-mapper/main/pom.xml
-[vulnerabilities-url]: https://snyk.io/test/github/lucafilipozzi/keycloak-regex-mapper?targetFile=pom.xml
