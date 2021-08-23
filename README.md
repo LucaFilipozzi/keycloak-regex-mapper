@@ -37,20 +37,20 @@ TODO
 
 This project follows the module/bundle approach to packaging keycloak extensions:
 
-  * `module` builds the jar that contains the keycloak extensions
+* `module` builds the jar that contains the keycloak extensions
 
-  * `bundle` builds the ear that contains the jar from `module` and the jars for
-    any not-provided dependencies
+* `bundle` builds the ear that contains the jar from `module` and the jars for
+  any not-provided dependencies
 
 ### coding conventions
 
 This project uses:
 
-  * [checkstyle][checkstyle] to achieve compliance with the [Google Java Style Guide][style-guide].
-    Please add the checkstyle plugin to your IDE.
+* [checkstyle][checkstyle] to achieve compliance with the [Google Java Style Guide][style-guide].
+  Please add the checkstyle plugin to your IDE.
 
-  * [SonarLint][sonarlint] to improve code quality and code security.
-    Please add the SonarLint plugin to your IDE.
+* [SonarLint][sonarlint] to improve code quality and code security.
+  Please add the SonarLint plugin to your IDE.
 
 ---
 Copyright 2021 Luca Filipozzi. Some rights reserved. See [LICENSE][license-url].
