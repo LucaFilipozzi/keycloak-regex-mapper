@@ -84,7 +84,6 @@ Copyright 2021 Luca Filipozzi. Some rights reserved. See [LICENSE][license-url].
 
 [lines-of-code-img]: https://badgen.net/codeclimate/loc/LucaFilipozzi/keycloak-regex-mapper?icon=codeclimate
 [lines-of-code-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper
-[maintainability-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper/maintainability
 [maintainability-img]: https://badgen.net/codeclimate/maintainability/LucaFilipozzi/keycloak-regex-mapper?icon=codeclimate
 [maintainability-url]: https://codeclimate.com/github/LucaFilipozzi/keycloak-regex-mapper/maintainability
 [technical-debt-img]: https://badgen.net/codeclimate/tech-debt/LucaFilipozzi/keycloak-regex-mapper?icon=codeclimate
