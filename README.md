@@ -25,7 +25,7 @@ expressions.
 
 ### deployment
 
-Copy `keycloak-regex-mapper-«version».ear` to `${KEYCLOAK_HOME}/deployments`.
+Copy `keycloak-regex-mapper-«version».jar` to `${KEYCLOAK_HOME}/providers`.
 
 ### configuration
 
