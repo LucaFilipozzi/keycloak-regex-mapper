@@ -21,4 +21,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        args: 'bundle/target/*.ear'
+        args: 'module/target/*.jar'
