@@ -27,6 +27,10 @@ public final class RegexRealmAndClientRoleMapperUtil {
 
   public static final String REALM_ROLES_REGULAR_EXPRESSION = "realm-roles-regular-expression";
 
+  public static final String SEARCH_ROLES_ATTRIBUTE_NAME = "search-roles-attribute-name";
+
+  public static final String SEARCH_ROLES_REGULAR_EXPRESSION = "search-roles-regular-expression";
+
   private static final Logger LOG = Logger.getLogger(RegexRealmAndClientRoleMapperUtil.class);
 
   private RegexRealmAndClientRoleMapperUtil() {
@@ -39,12 +43,20 @@ public final class RegexRealmAndClientRoleMapperUtil {
     // adjust the user's client role assignments
     String clientRolesRegularExpression = mapper.getConfig().getOrDefault(CLIENT_ROLES_REGULAR_EXPRESSION, "");
     String clientRolesAttributeName = mapper.getConfig().getOrDefault(CLIENT_ROLES_ATTRIBUTE_NAME, "");
-    RegexRealmAndClientRoleMapperUtil.adjustUserClientRoleAssignments(realm, user, assertedValues, clientRolesRegularExpression, clientRolesAttributeName);
+    if(clientRolesRegularExpression != "" && clientRolesAttributeName != "")
+        RegexRealmAndClientRoleMapperUtil.adjustUserClientRoleAssignments(realm, user, assertedValues, clientRolesRegularExpression, clientRolesAttributeName);
 
     // adjust the user's realm role assignments
     String realmRolesRegularExpression = mapper.getConfig().getOrDefault(REALM_ROLES_REGULAR_EXPRESSION, "");
     String realmRolesAttributeName = mapper.getConfig().getOrDefault(REALM_ROLES_ATTRIBUTE_NAME, "");
-    RegexRealmAndClientRoleMapperUtil.adjustUserRealmRoleAssignments(realm, user, assertedValues, realmRolesRegularExpression, realmRolesAttributeName);
+    if(realmRolesRegularExpression != "" && realmRolesRegularExpression != "")
+        RegexRealmAndClientRoleMapperUtil.adjustUserRealmRoleAssignments(realm, user, assertedValues, realmRolesRegularExpression, realmRolesAttributeName);
+
+    // adjust the user's attribute-based (search) role assignments
+    String searchRolesRegularExpression = mapper.getConfig().getOrDefault(SEARCH_ROLES_REGULAR_EXPRESSION, "");
+    String searchRolesAttributeName = mapper.getConfig().getOrDefault(SEARCH_ROLES_ATTRIBUTE_NAME, "");
+    if(searchRolesRegularExpression != "" && searchRolesAttributeName != "")
+        RegexRealmAndClientRoleMapperUtil.adjustUserSearchRoleAssignments(realm, user, assertedValues, searchRolesRegularExpression, searchRolesAttributeName);
   }
 
   private static void adjustUserClientRoleAssignments(RealmModel realm, UserModel user, Set<String> assertedValues, String regularExpression, String attributeName) {
@@ -109,5 +121,11 @@ public final class RegexRealmAndClientRoleMapperUtil {
 
     // un-assign the realm roles that the user has but shouldn't
     Sets.difference(haveRoles, wantRoles).forEach(user::deleteRoleMapping);
+  }
+
+  private static void adjustUserSearchRoleAssignments(RealmModel realm, UserModel user, Set<String> assertedValues, String regularExpression, String attributeName) {
+    LOG.trace("adjust user attribute-based role assignments");
+
+    // TODO
   }
 }

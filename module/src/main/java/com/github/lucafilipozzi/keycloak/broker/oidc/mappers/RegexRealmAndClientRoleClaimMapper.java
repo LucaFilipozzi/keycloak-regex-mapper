@@ -74,6 +74,20 @@ public class RegexRealmAndClientRoleClaimMapper extends AbstractClaimMapper {
     realmRolesRegularExpressionConfigProperty.setHelpText("regular expression to apply to the OIDC claim to extract realm roles; must specify one named-capturing groups: role");
     realmRolesRegularExpressionConfigProperty.setType(ProviderConfigProperty.STRING_TYPE);
     configProperties.add(realmRolesRegularExpressionConfigProperty);
+
+    ProviderConfigProperty searchRolesAttributeNameAttributeNameConfigProperty = new ProviderConfigProperty();
+    searchRolesAttributeNameAttributeNameConfigProperty.setName(RegexRealmAndClientRoleMapperUtil.SEARCH_ROLES_ATTRIBUTE_NAME);
+    searchRolesAttributeNameAttributeNameConfigProperty.setLabel("search roles attribute name");
+    searchRolesAttributeNameAttributeNameConfigProperty.setHelpText("only evaluate realm or client roles having an attribute with this name");
+    searchRolesAttributeNameAttributeNameConfigProperty.setType(ProviderConfigProperty.STRING_TYPE);
+    configProperties.add(searchRolesAttributeNameAttributeNameConfigProperty);
+
+    ProviderConfigProperty searchRolesAttributeNameRegularExpressionConfigProperty = new ProviderConfigProperty();
+    searchRolesAttributeNameRegularExpressionConfigProperty.setName(RegexRealmAndClientRoleMapperUtil.SEARCH_ROLES_REGULAR_EXPRESSION);
+    searchRolesAttributeNameRegularExpressionConfigProperty.setLabel("search roles regular expression");
+    searchRolesAttributeNameRegularExpressionConfigProperty.setHelpText("regular expression to apply to the OIDC claim to search for roles having this attribute value; must specify one named-capturing groups: value");
+    searchRolesAttributeNameRegularExpressionConfigProperty.setType(ProviderConfigProperty.STRING_TYPE);
+    configProperties.add(searchRolesAttributeNameRegularExpressionConfigProperty);
   }
 
   @Override
