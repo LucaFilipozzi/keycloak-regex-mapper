@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import org.jboss.logging.Logger;
 import org.keycloak.models.ClientModel;
@@ -27,6 +28,10 @@ public final class RegexRealmAndClientRoleMapperUtil {
 
   public static final String REALM_ROLES_REGULAR_EXPRESSION = "realm-roles-regular-expression";
 
+  public static final String SEARCH_ROLES_ATTRIBUTE_NAME = "search-roles-attribute-name";
+
+  public static final String SEARCH_ROLES_REGULAR_EXPRESSION = "search-roles-regular-expression";
+
   private static final Logger LOG = Logger.getLogger(RegexRealmAndClientRoleMapperUtil.class);
 
   private RegexRealmAndClientRoleMapperUtil() {
@@ -39,12 +44,20 @@ public final class RegexRealmAndClientRoleMapperUtil {
     // adjust the user's client role assignments
     String clientRolesRegularExpression = mapper.getConfig().getOrDefault(CLIENT_ROLES_REGULAR_EXPRESSION, "");
     String clientRolesAttributeName = mapper.getConfig().getOrDefault(CLIENT_ROLES_ATTRIBUTE_NAME, "");
-    RegexRealmAndClientRoleMapperUtil.adjustUserClientRoleAssignments(realm, user, assertedValues, clientRolesRegularExpression, clientRolesAttributeName);
+    if(clientRolesRegularExpression != "" && clientRolesAttributeName != "")
+        RegexRealmAndClientRoleMapperUtil.adjustUserClientRoleAssignments(realm, user, assertedValues, clientRolesRegularExpression, clientRolesAttributeName);
 
     // adjust the user's realm role assignments
     String realmRolesRegularExpression = mapper.getConfig().getOrDefault(REALM_ROLES_REGULAR_EXPRESSION, "");
     String realmRolesAttributeName = mapper.getConfig().getOrDefault(REALM_ROLES_ATTRIBUTE_NAME, "");
-    RegexRealmAndClientRoleMapperUtil.adjustUserRealmRoleAssignments(realm, user, assertedValues, realmRolesRegularExpression, realmRolesAttributeName);
+    if(realmRolesRegularExpression != "" && realmRolesRegularExpression != "")
+        RegexRealmAndClientRoleMapperUtil.adjustUserRealmRoleAssignments(realm, user, assertedValues, realmRolesRegularExpression, realmRolesAttributeName);
+
+    // adjust the user's attribute-based (search) role assignments
+    String searchRolesRegularExpression = mapper.getConfig().getOrDefault(SEARCH_ROLES_REGULAR_EXPRESSION, "");
+    String searchRolesAttributeName = mapper.getConfig().getOrDefault(SEARCH_ROLES_ATTRIBUTE_NAME, "");
+    if(searchRolesRegularExpression != "" && searchRolesAttributeName != "")
+        RegexRealmAndClientRoleMapperUtil.adjustUserSearchRoleAssignments(realm, user, assertedValues, searchRolesRegularExpression, searchRolesAttributeName);
   }
 
   private static void adjustUserClientRoleAssignments(RealmModel realm, UserModel user, Set<String> assertedValues, String regularExpression, String attributeName) {
@@ -109,5 +122,37 @@ public final class RegexRealmAndClientRoleMapperUtil {
 
     // un-assign the realm roles that the user has but shouldn't
     Sets.difference(haveRoles, wantRoles).forEach(user::deleteRoleMapping);
+  }
+
+  private static void adjustUserSearchRoleAssignments(RealmModel realm, UserModel user, Set<String> assertedValues, String regularExpression, String attributeName) {
+    LOG.trace("adjust user attribute-based role assignments");
+
+    Pattern pattern = Pattern.compile(regularExpression);
+
+    // determine the roles that the user should have
+    Set<RoleModel> wantRoles = assertedValues.stream()
+        .map(pattern::matcher)
+        .filter(Matcher::matches)
+        .filter(matcher -> matcher.groupCount() == 1)
+        .filter(matcher -> matcher.group("value") != null)
+        .flatMap(matcher ->
+            realm.getRolesStream()
+                .filter(realmRole ->
+                    realmRole.getAttributeStream(attributeName)
+                        .flatMap(s -> Stream.of(s.split(",")))
+                        .anyMatch(s -> matcher.group("value").equals(s))))
+        .collect(Collectors.toSet());
+
+    // determine the roles that the user does have
+    Set<RoleModel> haveRoles = user.getRoleMappingsStream()
+        .filter(role -> role.getAttributes().containsKey(attributeName))
+        .collect(Collectors.toSet());
+
+    // assign the roles that the user should have but doesn't
+    Sets.difference(wantRoles, haveRoles).forEach(user::grantRole);
+
+    // un-assign the roles that the user has but shouldn't
+    Sets.difference(haveRoles, wantRoles).forEach(user::deleteRoleMapping);
+
   }
 }
