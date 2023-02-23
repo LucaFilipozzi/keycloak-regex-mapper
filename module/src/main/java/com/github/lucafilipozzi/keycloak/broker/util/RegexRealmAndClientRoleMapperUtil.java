@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import org.jboss.logging.Logger;
 import org.keycloak.models.ClientModel;
@@ -126,6 +127,32 @@ public final class RegexRealmAndClientRoleMapperUtil {
   private static void adjustUserSearchRoleAssignments(RealmModel realm, UserModel user, Set<String> assertedValues, String regularExpression, String attributeName) {
     LOG.trace("adjust user attribute-based role assignments");
 
-    // TODO
+    Pattern pattern = Pattern.compile(regularExpression);
+
+    // determine the roles that the user should have
+    Set<RoleModel> wantRoles = assertedValues.stream()
+        .map(pattern::matcher)
+        .filter(Matcher::matches)
+        .filter(matcher -> matcher.groupCount() == 1)
+        .filter(matcher -> matcher.group("value") != null)
+        .flatMap(matcher ->
+            realm.getRolesStream()
+                .filter(realmRole ->
+                    realmRole.getAttributeStream(attributeName)
+                        .flatMap(s -> Stream.of(s.split(",")))
+                        .anyMatch(s -> matcher.group("value").equals(s))))
+        .collect(Collectors.toSet());
+
+    // determine the roles that the user does have
+    Set<RoleModel> haveRoles = user.getRoleMappingsStream()
+        .filter(role -> role.getAttributes().containsKey(attributeName))
+        .collect(Collectors.toSet());
+
+    // assign the roles that the user should have but doesn't
+    Sets.difference(wantRoles, haveRoles).forEach(user::grantRole);
+
+    // un-assign the roles that the user has but shouldn't
+    Sets.difference(haveRoles, wantRoles).forEach(user::deleteRoleMapping);
+
   }
 }
