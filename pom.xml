@@ -48,7 +48,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <github.account>lucafilipozzi</github.account>
     <revision>1.0.9</revision>
-    <keycloak.version>15.0.2</keycloak.version>
+    <keycloak.version>24.0.0</keycloak.version>
   </properties>
 
   <!-- IMPORTANT: don't forget to update jboss-deployment-structure.xml -->
